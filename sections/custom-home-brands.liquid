@@ -1,0 +1,51 @@
+<div>
+    <h2 class="heading-14-copy">Shop hundreds of brands</h2>
+    
+    <div class="brands">
+        {%- for block in section.blocks -%}
+            {%- assign collection = collections[block.settings.collection] -%}
+            <div class="brand">
+                <a href="{{ collection.url }}" class="brand-link">
+                    <img src="{{ collection.image | default: collection.products.first.featured_image | img_url: 'master' }}" alt="">
+                    <h5 class="brand-title">{{ collection.title }}</h5>
+                </a>
+            </div>
+        {%- endfor -%}
+    </div>
+    <div class="category-copy">
+        <a href="#" class="link-block-6 w-inline-block">
+        <div class="text-block-8">
+            <a href="/collections/all">
+                View All →
+            </a>
+        </div>
+        </a>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Homepage Brands",
+    "class": "home-brands",
+    "blocks": [
+        {
+            "type": "collection",
+            "name": "Collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection Brands"
+                }
+            ]
+        }
+    ],
+    "max_blocks": 4,
+    "presets": [
+        {
+            "category": "custom",
+            "name":"Homepage Brands Section"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,80 @@
+<div class="section-5 custom-home-collection" id="section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="custom-home-collection">
+  <div class="fe02_container-copy">
+    {%- for block in section.blocks -%}
+      {%- assign collection = collections[block.settings.collection] -%}
+      {% assign collection_image = block.settings.image | default: collection.image | default: collection.products.first.featured_image %}
+
+      <div class="collection-item">
+        <a href="{{ block.settings.link | default: collection.url }}" class="collection-link">
+          <img src="{{ collection_image | img_url: 'master' }}" alt="" class="collection-image">
+          <h3 class="collection-title">{{ block.settings.title | default: collection.title }}</h3>
+        </a>
+        </div>
+    {%- endfor -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "Homepage Collections",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "collecion_image",
+        "label": "Collection Image",
+        "info": "collection image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "1120 x 1200px .jpg recommended"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Collection Name"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Collecction link",
+            "info": "If none is set, collection URL is used."
+          }
+        ]
+      }
+    ],
+    "presets": [
+        {
+            "category": "custom",
+            "name":"Homepage Collections",
+            "settings": {},
+            "blocks": [
+              {
+                "type": "collection"
+              },
+              {
+                "type": "collection"
+              },
+              {
+                "type": "collection"
+              }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
